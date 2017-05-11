@@ -14,8 +14,8 @@ set clipboard+=unnamed
 set number      " line numbers
 set mouse=a     " capture mouse
 if has('gui_running')
-  colorscheme PaperColor
-  let g:airline_theme='papercolor'
+  colorscheme pyte
+  let g:airline_theme='pyte'
 else
   colorscheme jellybeans
   let g:airline_theme='jellybeans'
