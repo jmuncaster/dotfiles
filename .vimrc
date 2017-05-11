@@ -40,7 +40,7 @@ noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
 " Ctrl+n toggles NERDTree
-noremap <C-n> :NERDTreeToggle<CR>
+"noremap <C-n> :NERDTreeToggle<CR>
 
 noremap <C-Tab> :bn<cr>
 noremap <C-S-Tab> :bp<cr>
