@@ -123,9 +123,6 @@ cmap w!! w !sudo tee % >/dev/null
 " Open NERDTree automatically if no file is open
 " autocmd vimenter * if !argc() | NERDTree | endif
 
-"" nerdcommenter
-filetype plugin on
-
 " Close NERDTree automatically if only thing left
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
