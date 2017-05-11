@@ -129,11 +129,13 @@ cmap w!! w !sudo tee % >/dev/null
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 
 "" YouCompleteMe
-"let g:ycm_confirm_extra_conf = 0  " Suppress question when asking to load ycm_extra... file
+let g:ycm_confirm_extra_conf = 0  " Suppress question when asking to load ycm_extra... file
 let g:ycm_global_ycm_extra_conf = $HOME.'/.vim/.ycm_extra_conf.py'
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " Apply YCM FixIt
 map <Leader><Leader>f :YcmCompleter FixIt<CR>
+map <Leader><Leader>g :YcmCompleter GoTo<CR>
 
 " Use powerline fonts
 let g:airline_powerline_fonts = 1
