@@ -1,12 +1,9 @@
-git clone git://github.com/ajh17/VimCompletesMe.git
 git clone https://github.com/Valloric/YouCompleteMe.git
 git clone https://github.com/kien/ctrlp.vim.git
-git clone https://github.com/SirVer/ultisnips.git
 git clone https://github.com/bling/vim-airline
 git clone https://github.com/bling/vim-bufferline.git
 git clone git://github.com/vhdirk/vim-cmake.git
 git clone https://github.com/kchmck/vim-coffee-script.git
-git clone git://github.com/altercation/vim-colors-solarized.git
 git clone https://github.com/flazz/vim-colorschemes.git
 git clone https://github.com/tpope/vim-commentary.git
 git clone https://github.com/Lokaltog/vim-easymotion.git
