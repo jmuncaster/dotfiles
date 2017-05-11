@@ -167,4 +167,4 @@ let g:airline_powerline_fonts = 1
 
 " Let us leave a buffer that has been modified hanging around, outside a
 " window
-set hidden
+"set hidden
