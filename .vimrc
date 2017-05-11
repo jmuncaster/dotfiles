@@ -39,8 +39,6 @@ noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
-" Ctrl+n toggles NERDTree
-"noremap <C-n> :NERDTreeToggle<CR>
 
 noremap <C-Tab> :bn<cr>
 noremap <C-S-Tab> :bp<cr>
@@ -114,7 +112,6 @@ let g:ctrlp_custom_ignore = {
 "" Ctrl+P default to just filename
 let g:ctrlp_by_filename = 1
 
-
 "" Custom command to write as sudo: w!!
 " From http://nvie.com/posts/how-i-boosted-my-vim/
 cmap w!! w !sudo tee % >/dev/null
@@ -136,34 +133,8 @@ let g:ycm_global_ycm_extra_conf = $HOME.'/.vim/.ycm_extra_conf.py'
 " Apply YCM FixIt
 map <Leader><Leader>f :YcmCompleter FixIt<CR>
 
-"" Ultisnips
-let g:UltiSnipsExpandTrigger="<Leader><Leader>"   " Expand snippet
-let g:UltiSnipsJumpForwardTrigger="<C-j>"         " Next field
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"        " Prev field
-
-
-" Powerline stuff  (if commented, using vim-airline instead)
-"set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
-"set laststatus=2
-
-
-"set guifont=Monaco\ for\ Powerline:h15
-"let g:Powerline_symbols = 'fancy'
-"set encoding=utf-8
-"set t_Co=256
-"set fillchars+=stl:\ ,stlnc:\
-"set term=xterm-256color
-"set termencoding=utf-8
-
-
+" Use powerline fonts
 let g:airline_powerline_fonts = 1
-
-"if has("gui_running")
-"  let s:uname = system("uname")
-"  if s:uname == "Darwin\n"
-"     set guifont=Inconsolata\ for\ Powerline:h15
-"  endif
-"endif
 
 " Let us leave a buffer that has been modified hanging around, outside a
 " window
