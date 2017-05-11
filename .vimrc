@@ -131,7 +131,7 @@ filetype plugin on
 
 "" YouCompleteMe
 "let g:ycm_confirm_extra_conf = 0  " Suppress question when asking to load ycm_extra... file
-let g:ycm_global_ycm_extra_conf = '/Users/jmuncaster/.vim/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = $HOME.'/.vim/.ycm_extra_conf.py'
 
 " Apply YCM FixIt
 map <Leader><Leader>f :YcmCompleter FixIt<CR>
