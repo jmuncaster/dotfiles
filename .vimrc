@@ -126,6 +126,9 @@ cmap w!! w !sudo tee % >/dev/null
 " Close NERDTree automatically if only thing left
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+" For commentary
+autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
+
 "" YouCompleteMe
 "let g:ycm_confirm_extra_conf = 0  " Suppress question when asking to load ycm_extra... file
 let g:ycm_global_ycm_extra_conf = $HOME.'/.vim/.ycm_extra_conf.py'
