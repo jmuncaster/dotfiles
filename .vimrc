@@ -14,9 +14,11 @@ set clipboard+=unnamed
 set number      " line numbers
 set mouse=a     " capture mouse
 if has('gui_running')
-  colorscheme pyte
+  colorscheme PaperColor
+  let g:airline_theme='papercolor'
 else
   colorscheme jellybeans
+  let g:airline_theme='jellybeans'
 endif
 
 " GitGutter

@@ -1,6 +1,7 @@
 git clone https://github.com/Valloric/YouCompleteMe.git
 git clone https://github.com/kien/ctrlp.vim.git
 git clone https://github.com/bling/vim-airline
+git clone https://github.com/vim-airline/vim-airline-themes
 git clone https://github.com/bling/vim-bufferline.git
 git clone git://github.com/vhdirk/vim-cmake.git
 git clone https://github.com/kchmck/vim-coffee-script.git
