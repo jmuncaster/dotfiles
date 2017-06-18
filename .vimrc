@@ -6,9 +6,9 @@ execute pathogen#infect()
 "" Pre-load vim-sensible in case I want to override it.
 runtime! plugin/sensible.vim
 
-"" Default yank to system clipboard. Requires macvim or latest vim.
-" Run brew install macvim vim
-set clipboard+=unnamed
+"" Default yank to system clipboard.
+" See: https://stackoverflow.com/questions/30691466/
+set clipboard^=unnamed,unnamedplus
 
 "" My appearance stuff
 set number      " line numbers
