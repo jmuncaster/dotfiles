@@ -1,0 +1,7 @@
+[user]
+	email = justin@muncaster.io
+	name = Justin Muncaster
+[push]
+	default = simple
+[pull]
+	rebase = true
