@@ -6,9 +6,10 @@ execute pathogen#infect()
 "" Pre-load vim-sensible in case I want to override it.
 runtime! plugin/sensible.vim
 
-"" Default yank to system clipboard.
-" See: https://stackoverflow.com/questions/30691466/
-set clipboard^=unnamed,unnamedplus
+"" Default yank to system clipboard. Requires macvim or latest vim.
+" Run brew install macvim vim
+"set clipboard+=unnamed
+set clipboard=unnamedplus
 
 "" My appearance stuff
 set number      " line numbers
@@ -17,7 +18,7 @@ if has('gui_running')
   colorscheme PaperColor
   let g:airline_theme='papercolor'
 else
-  colorscheme jellybeans
+  colorscheme moonshine
   let g:airline_theme='jellybeans'
 endif
 
@@ -101,9 +102,6 @@ set hlsearch
 set nowrap
 set textwidth=0 wrapmargin=0
 
-"" From vim-fish.git
-compiler fish  " Set up :make to use fish for syntax checking.
-
 "" Ctrl+P custom ignore
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.git|\.hg|\.svn|\.archive|testdata|build|xcode)$',
@@ -131,15 +129,59 @@ autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 "" YouCompleteMe
 let g:ycm_confirm_extra_conf = 0  " Suppress question when asking to load ycm_extra... file
 let g:ycm_global_ycm_extra_conf = $HOME.'/.vim/.ycm_extra_conf.py'
-let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_always_populate_location_list = 1
 
 " Apply YCM FixIt
 map <Leader><Leader>f :YcmCompleter FixIt<CR>
 map <Leader><Leader>g :YcmCompleter GoTo<CR>
 
 " Use powerline fonts
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 
 " Let us leave a buffer that has been modified hanging around, outside a
 " window
 "set hidden
+
+" F4 -> make
+set makeprg=make\ -C\ build\ -j8
+nnoremap <F8> :cnext<cr>
+nnoremap <S-F8> :cprevious<cr>
+nnoremap <C-F8> :lnext<cr>
+nnoremap <C-S-F8> :lprevious<cr>
+nnoremap <F11> :YcmCompleter GoToInclude <cr>
+nnoremap <F12> :YcmCompleter GoToDefinition <cr>
+nnoremap <S-F12> :YcmCompleter GoToDeclaration <cr>
+"nnoremap <F5> :!./my_great_program<cr>
+
+"autocmd BufReadPost * AnsiEsc
+
+set shell=/bin/bash
+
+" https://www.quora.com/How-do-I-compile-a-program-C++-or-Java-in-Vim-like-Sublime-Text-Ctrl+B
+"
+" open quickfix window automatically when AsyncRun is executed
+" set the quickfix window n lines height.
+let g:asyncrun_open = 9
+ 
+" ring the bell to notify you job finished
+let g:asyncrun_bell = 1
+ 
+" F10 to toggle quickfix window
+"nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
+nnoremap <F10> :QToggle <cr>
+nnoremap <C-F10> :LToggle <cr>
+imap <F10> <esc> <F10> " Work in insert mode too
+imap <C-F10> <esc> <C-F10> " Work in insert mode too
+
+"fswitch
+nnoremap <C-F11> :FSHere <cr>
+imap <C-F11> <esc> <C-F11>
+
+let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs'] 
+
+noremap <silent> <F4> :AsyncRun -cwd=<root>/build cmake . <cr>
+noremap <silent> <F7> :AsyncRun -cwd=<root>/build make <cr>
+noremap <silent> <F6> :AsyncRun -cwd=<root>/build -raw make test <cr>
+
+noremap <silent><F2> :AsyncRun! -cwd=<root> grep -n -s -R <C-R><C-W> --exclude-dir='build*' --include='*.h*' --include='*.c*' '<root>' <cr>
