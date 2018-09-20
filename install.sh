@@ -1,3 +1,5 @@
+# Install plugins/vimrc specified by this repo
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 set -v
