@@ -150,7 +150,7 @@ let g:airline_powerline_fonts = 0
 
 " Open quickfix window automatically when AsyncRun is executed
 " set the quickfix window n lines height.
-let g:asyncrun_open = 9
+let g:asyncrun_open = 15
  
 " Ring the bell to notify you job finished
 let g:asyncrun_bell = 1
@@ -170,7 +170,8 @@ noremap <silent> <F4> :AsyncRun -cwd=<root>/build cmake . <cr>
 "nnoremap <F5> :!./my_great_program<cr>
 
 " Run make test
-noremap <silent> <F6> :AsyncRun -cwd=<root>/build -raw make test <cr>
+noremap <silent> <F6> :AsyncRun -cwd=<root>/build -raw ctest --output-on-failure <cr>
+noremap <C-F6> :AsyncStop <cr>
 
 " Build project
 noremap <silent> <F7> :AsyncRun -cwd=<root>/build make -j8 <cr>
