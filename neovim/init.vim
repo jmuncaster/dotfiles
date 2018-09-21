@@ -1,0 +1,207 @@
+"" Define plugins
+call plug#begin()
+Plug 'tpope/vim-sensible'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'airblade/vim-gitgutter'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-repeat'
+Plug 'vim-syntastic/syntastic'
+Plug 'Valloric/ListToggle'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'vhdirk/vim-cmake'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fugitive'
+Plug 'flazz/vim-colorschemes'
+Plug 'kien/ctrlp.vim'
+Plug 'berdandy/ansiesc.vim'
+Plug 'dag/vim-fish'
+Plug 'derekwyatt/vim-fswitch'
+Plug 'bling/vim-airline'
+Plug 'scrooloose/nerdcommenter'
+"Plug 'vim-scripts/Conque-GDB'
+call plug#end()
+
+"" Fix some odd garbage characters in status bar.
+" https://github.com/neovim/neovim/issues/5990
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
+" https://github.com/neovim/neovim/issues/6154
+:set guicursor=
+
+" GitGutter
+highlight clear SignColumn
+highlight GitGutterAdd ctermfg=green
+highlight GitGutterChange ctermfg=yellow
+highlight GitGutterDelete ctermfg=red
+highlight GitGutterChangeDelete ctermfg=yellow
+
+" Save .swp file in temporary directory
+set directory=~/tmp,/var/tmp,/tmp
+
+"" My custom keybindings
+let mapleader = ","
+" Map Ctrl+{j,k,h,l} to select windows.
+noremap <C-j> <C-W>j
+noremap <C-k> <C-W>k
+noremap <C-h> <C-W>h
+noremap <C-l> <C-W>l
+
+noremap <C-Tab> :bn<cr>
+noremap <C-S-Tab> :bp<cr>
+
+" Go to buffer by number
+noremap <leader>1 :1b<cr>
+noremap <leader>2 :2b<cr>
+noremap <leader>3 :3b<cr>
+noremap <leader>4 :4b<cr>
+noremap <leader>5 :5b<cr>
+noremap <leader>6 :6b<cr>
+noremap <leader>7 :7b<cr>
+noremap <leader>8 :8b<cr>
+noremap <leader>9 :9b<cr>
+
+" Go to tab by number
+noremap <leader><leader>1 1gt
+noremap <leader><leader>2 2gt
+noremap <leader><leader>3 3gt
+noremap <leader><leader>4 4gt
+noremap <leader><leader>5 5gt
+noremap <leader><leader>6 6gt
+noremap <leader><leader>7 7gt
+noremap <leader><leader>8 8gt
+noremap <leader><leader>9 9gt
+noremap <leader><leader>0 :tablast<cr>
+
+"" Tabs
+" http://vim.wikia.com/wiki/Converting_tabs_to_spaces
+filetype plugin indent on
+" show existing tab with 4 spaces width
+set tabstop=2
+" when indenting with '>', use 4 spaces width
+set shiftwidth=2
+set expandtab
+
+" On pressing tab, insert 4 spaces
+"set expandtabset expandtab    " insert spaces when tab is pressed
+"set tabstop=2    " tab = 2 spaces
+"set softtabstop
+"set shiftwidth=2 " use 2 spaces for indentation
+"set list         " show whitespace characters
+
+" Auto-remove trailing whitespace when saving source files
+autocmd FileType c,cpp,h,hpp autocmd BufWritePre <buffer> %s/\s\+$//e
+
+"" From http://blog.mojotech.com/a-veterans-vimrc/
+set nocompatible
+set undolevels=100  " Use more levels of undo
+
+"" Searching
+set ignorecase
+set hlsearch
+
+"" Don't wrap lines
+set nowrap
+set textwidth=0 wrapmargin=0
+" Set this to have long lines wrap inside comments.
+setlocal textwidth=120
+
+""" Ctrl+P
+" Ctrl+P custom ignore
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|\.archive|testdata|build|xcode)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
+" Ctrl+P default to just filename
+let g:ctrlp_by_filename = 1
+
+"" Custom command to write as sudo: w!!
+" From http://nvie.com/posts/how-i-boosted-my-vim/
+cmap w!! w !sudo tee % >/dev/null
+
+" For commentary
+"autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
+
+""" YouCompleteMe
+" Suppress question when asking to load ycm_extra... file
+let g:ycm_confirm_extra_conf = 0
+" Put .ycm_extra_conf here. This file is special b/c it will look for the
+" compile database in your current build directory.
+let g:ycm_global_ycm_extra_conf = $HOME.'/.vim/.ycm_extra_conf.py'
+" Populates location list with current files errors
+let g:ycm_always_populate_location_list = 1
+
+" Apply YCM FixIt
+map <Leader><Leader>f :YcmCompleter FixIt<CR>
+map <Leader><Leader>g :YcmCompleter GoTo<CR>
+
+" Use powerline fonts
+let g:airline_powerline_fonts = 0
+
+
+
+""" IDE-like Setup
+" https://www.quora.com/How-do-I-compile-a-program-C++-or-Java-in-Vim-like-Sublime-Text-Ctrl+B
+" Also using YouCompleteMe for semantic reference finding
+" Also using ListTogle to toggle quickfix and listwindow views
+" Also using fswitch to toggle header/cpp
+
+" Open quickfix window automatically when AsyncRun is executed
+" set the quickfix window n lines height.
+let g:asyncrun_open = 15
+ 
+" Ring the bell to notify you job finished
+let g:asyncrun_bell = 1
+ 
+
+"" IDE Setup/Hotkeys
+
+" Let asyncrun set up project root
+let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs'] 
+
+" Grep for references to current word
+noremap <silent><F2> :AsyncRun! -cwd=<root> grep -n -s -R <C-R><C-W> --exclude-dir='build*' --include='*.h*' --include='*.c*' '<root>' <cr>
+
+" Run cmake
+noremap <silent> <F4> :AsyncRun -cwd=<root>/build cmake . <cr>
+nnoremap <F5> :ConqueGdb -d build <cr>
+nnoremap <C-F5> :AsyncRun -raw -cwd=<root>/build make -j12 run <cr>
+
+" Run make test
+noremap <silent> <F6> :AsyncRun -cwd=<root>/build -raw ctest --output-on-failure <cr>
+noremap <C-F6> :AsyncStop <cr>
+
+" Build project
+noremap <silent> <F7> :AsyncRun -cwd=<root>/build make -j8 <cr>
+
+" Navigate to next/prev quickfix item. Build errors show up in quickfix list.
+nnoremap <F8> :cnext<cr>
+nnoremap <S-F8> :cprevious<cr>
+
+" Navigate to next/prev listwin item. Errors detected by YCM show up here.
+nnoremap <C-F8> :lnext<cr>
+nnoremap <C-S-F8> :lprevious<cr>
+
+" F10 (C-F10) to toggle quickfix (listwindow)
+"nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
+nnoremap <F10> :QToggle <cr>
+nnoremap <C-F10> :LToggle <cr>
+" ...in insert mode too
+imap <F10> <esc> <F10>
+imap <C-F10> <esc> <C-F10>
+
+" Finding header files
+" When on top of an include file, go to it.
+nnoremap <F11> :YcmCompleter GoToInclude <cr>
+" Switch between header/cpp
+nnoremap <C-F11> :FSHere <cr>
+" ...in insert mode too
+imap <C-F11> <esc> <C-F11>
+
+" Go to definition/declaration. Go to definition doesn't work from
+" header-to-source
+nnoremap <F12> :YcmCompleter GoToDefinition <cr>
+nnoremap <S-F12> :YcmCompleter GoToDeclaration <cr>
+
