@@ -23,6 +23,12 @@ https://neovim.io/doc/user/provider.html#provider-python
 bash install_python_plugin_support.sh
 ```
 
+## Create softlink to init.vim
+
+```
+bash create_softlink.sh
+```
+
 ## Oni
 
 Install instructions: https://github.com/onivim/oni/wiki/Installation-Guide#linux
