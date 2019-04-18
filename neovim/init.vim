@@ -109,7 +109,7 @@ setlocal textwidth=120
 """ Ctrl+P
 " Ctrl+P custom ignore
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|\.archive|testdata|build|xcode)$',
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|\.archive|testdata|build|build-docker|xcode)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
