@@ -1,33 +1,29 @@
-"" Define plugins
-call plug#begin()
-Plug 'tpope/vim-sensible'
-Plug 'Lokaltog/vim-easymotion'
-Plug 'airblade/vim-gitgutter'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
-Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-repeat'
-Plug 'vim-syntastic/syntastic'
-Plug 'Valloric/ListToggle'
-Plug 'skywind3000/asyncrun.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'vhdirk/vim-cmake'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-fugitive'
-Plug 'flazz/vim-colorschemes'
-Plug 'kien/ctrlp.vim'
-Plug 'berdandy/ansiesc.vim'
-Plug 'dag/vim-fish'
-Plug 'derekwyatt/vim-fswitch'
-Plug 'bling/vim-airline'
-Plug 'scrooloose/nerdcommenter'
-"Plug 'vim-scripts/Conque-GDB'
-call plug#end()
+"let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 
-"" Fix some odd garbage characters in status bar.
-" https://github.com/neovim/neovim/issues/5990
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
-" https://github.com/neovim/neovim/issues/6154
-:set guicursor=
+" Pathogen
+execute pathogen#infect()
+
+"" Pre-load vim-sensible in case I want to override it.
+runtime! plugin/sensible.vim
+
+"" Default yank to system clipboard. Requires macvim or latest vim.
+" Run brew install macvim vim
+"set clipboard+=unnamed
+set clipboard=unnamedplus
+
+" Bash default shell for sanity
+set shell=/bin/bash
+
+"" My appearance stuff
+set number      " line numbers
+set mouse=a     " capture mouse
+if has('gui_running')
+  colorscheme PaperColor
+  let g:airline_theme='papercolor'
+else
+  colorscheme moonshine
+  let g:airline_theme='jellybeans'
+endif
 
 " GitGutter
 highlight clear SignColumn
@@ -35,6 +31,10 @@ highlight GitGutterAdd ctermfg=green
 highlight GitGutterChange ctermfg=yellow
 highlight GitGutterDelete ctermfg=red
 highlight GitGutterChangeDelete ctermfg=yellow
+
+" Disable bell
+set visualbell    " don't beep
+set noerrorbells  " don't beep
 
 " Save .swp file in temporary directory
 set directory=~/tmp,/var/tmp,/tmp
@@ -109,7 +109,7 @@ setlocal textwidth=120
 """ Ctrl+P
 " Ctrl+P custom ignore
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|\.archive|testdata|build|build-docker|xcode)$',
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|\.archive|testdata|build|xcode)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
@@ -166,8 +166,8 @@ noremap <silent><F2> :AsyncRun! -cwd=<root> grep -n -s -R <C-R><C-W> --exclude-d
 
 " Run cmake
 noremap <silent> <F4> :AsyncRun -cwd=<root>/build cmake . <cr>
-nnoremap <F5> :ConqueGdb -d build <cr>
-nnoremap <C-F5> :AsyncRun -raw -cwd=<root>/build make -j12 run <cr>
+
+"nnoremap <F5> :!./my_great_program<cr>
 
 " Run make test
 noremap <silent> <F6> :AsyncRun -cwd=<root>/build -raw ctest --output-on-failure <cr>
