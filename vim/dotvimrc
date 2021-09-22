@@ -20,14 +20,21 @@ Plug 'dag/vim-fish'
 Plug 'derekwyatt/vim-fswitch'
 Plug 'bling/vim-airline'
 Plug 'scrooloose/nerdcommenter'
+Plug 'doums/darcula'
 "Plug 'vim-scripts/Conque-GDB'
 call plug#end()
+
+"" Colorscheme
+colorscheme darcula
 
 "" Fix some odd garbage characters in status bar.
 " https://github.com/neovim/neovim/issues/5990
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 " https://github.com/neovim/neovim/issues/6154
 :set guicursor=
+
+" Show line numbers
+set number
 
 " GitGutter
 highlight clear SignColumn
