@@ -1,3 +1,8 @@
 set lines=60 columns=120
-set guifont=Jetbrains\ Mono:h16
+set guifont=Jetbrains\ Mono:h12
+"set guifont=Monaco:h16
+
+"" Solve lack of vertical bar cursor in MacVim GUI, and block cursor
+"" is same color as background.
+:highlight Cursor gui=reverse guifg=NONE guibg=NONE
 
