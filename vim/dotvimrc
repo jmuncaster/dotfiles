@@ -28,6 +28,7 @@ call plug#end()
 colorscheme darcula
 
 "" Clipboard
+" https://vi.stackexchange.com/questions/84/how-can-i-copy-text-to-the-system-clipboard-from-vim
 set clipboard=unnamed  "" MacOS and Windows: Primary system clipboard
 
 "" Fix some odd garbage characters in status bar.
